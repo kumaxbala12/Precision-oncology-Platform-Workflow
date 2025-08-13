@@ -1,0 +1,55 @@
+precision-oncology-platform/
+├── .github/
+│   └── workflows/
+│       └── ci.yml
+├── app/
+│   └── streamlit_app.py
+├── containers/
+│   └── Dockerfile
+├── data/
+│   ├── processed/
+│   └── raw/
+│       ├── expression_small.csv
+│       ├── features_small.csv
+│       ├── labels_small.csv
+│       ├── methylation_small.csv
+│       ├── response_small.csv
+│       └── survival_small.csv
+├── docs/
+│   └── system_diagram.md
+├── modules/
+│   ├── bulk_rnaseq/
+│   │   ├── __init__.py
+│   │   └── train_classifier.py
+│   ├── drug_response/
+│   │   ├── __init__.py
+│   │   └── train_elasticnet.py
+│   ├── multiomics/
+│   │   ├── __init__.py
+│   │   └── integrate_cca.py
+│   ├── single_cell/
+│   │   ├── __init__.py
+│   │   └── README.md
+│   ├── survival/
+│   │   ├── __init__.py
+│   │   └── cox_pipeline.py
+│   └── __init__.py
+├── notebooks/
+│   └── 00_demo.ipynb
+├── results/
+│   ├── figures/
+│   └── models/
+├── tests/
+│   └── test_smoke.py
+├── workflow/
+│   ├── nextflow/
+│   │   ├── main.nf
+│   │   └── nextflow.config
+│   └── snakemake/
+│       └── Snakefile
+├── .gitignore
+├── dev-requirements.txt
+├── LICENSE
+├── Makefile
+├── README.md
+└── requirements.txt

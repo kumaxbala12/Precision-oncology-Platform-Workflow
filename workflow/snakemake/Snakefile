@@ -1,0 +1,28 @@
+
+import os
+rule all:
+    input:
+        "results/models/bulk_clf.joblib",
+        "results/figures/survival_km.png",
+        "results/models/drug_elasticnet.joblib",
+        "results/figures/cca_scatter.png"
+
+rule bulk_classifier:
+    input: expr="data/raw/expression_small.csv", labels="data/raw/labels_small.csv"
+    output: model="results/models/bulk_clf.joblib"
+    shell: "python modules/bulk_rnaseq/train_classifier.py --expr {input.expr} --labels {input.labels} --out {output.model}"
+
+rule survival_km:
+    input: feats="data/raw/features_small.csv", surv="data/raw/survival_small.csv"
+    output: fig="results/figures/survival_km.png"
+    shell: "python modules/survival/cox_pipeline.py --features {input.feats} --survival {input.surv} --outfig {output.fig}"
+
+rule drug_response:
+    input: expr="data/raw/expression_small.csv", resp="data/raw/response_small.csv"
+    output: model="results/models/drug_elasticnet.joblib"
+    shell: "python modules/drug_response/train_elasticnet.py --expr {input.expr} --resp {input.resp} --out {output.model}"
+
+rule multiomics_cca:
+    input: expr="data/raw/expression_small.csv", meth="data/raw/methylation_small.csv", labels="data/raw/labels_small.csv"
+    output: fig="results/figures/cca_scatter.png"
+    shell: "python modules/multiomics/integrate_cca.py --expr {input.expr} --meth {input.meth} --labels {input.labels} --outfig {output.fig}"
